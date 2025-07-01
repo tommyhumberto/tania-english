@@ -1,7 +1,4 @@
 import { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
 
 export default function TaniaApp() {
@@ -28,7 +25,13 @@ export default function TaniaApp() {
     </div>,
     <div>
       <p className="mb-2">✍️ Let’s practice! What is your name?</p>
-      <Input placeholder="My name is..." value={name} onChange={e => setName(e.target.value)} />
+      <input
+        type="text"
+        placeholder="My name is..."
+        value={name}
+        onChange={e => setName(e.target.value)}
+        className="w-full px-3 py-2 border rounded-md"
+      />
     </div>,
     <div className="text-center">
       <p className="text-lg">🎉 Great job, {name || 'student'}!</p>
@@ -38,25 +41,28 @@ export default function TaniaApp() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-white p-4">
-      <Card className="max-w-xl w-full p-6 shadow-xl rounded-2xl">
-        <CardContent>
-          <motion.div
-            key={step}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="space-y-4"
-          >
-            {steps[step]}
-          </motion.div>
-          {step < steps.length - 1 && (
-            <div className="mt-6 text-right">
-              <Button onClick={next}>Next</Button>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+      <div className="max-w-xl w-full p-6 shadow-xl rounded-2xl border border-gray-200 bg-gray-50">
+        <motion.div
+          key={step}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5 }}
+          className="space-y-4"
+        >
+          {steps[step]}
+        </motion.div>
+        {step < steps.length - 1 && (
+          <div className="mt-6 text-right">
+            <button
+              onClick={next}
+              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            >
+              Next
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
